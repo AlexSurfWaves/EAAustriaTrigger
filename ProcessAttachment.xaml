@@ -1,11 +1,12 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="ProcessAttachment" this:ProcessAttachment.in_FilePath="C:\Temp\EA_Form.pdf" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="ProcessAttachment" this:ProcessAttachment.in_FilePath="C:\Temp\EA_Form.pdf" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.uipath.com/workflow/activities/intelligentocr" xmlns:p1="http://schemas.uipath.com/workflow/activities/ocr" xmlns:p2="http://schemas.uipath.com/workflow/activities/intelligentocr/extraction" xmlns:p3="http://schemas.uipath.com/workflow/activities/document-processing-contracts/extraction" xmlns:p4="http://schemas.uipath.com/workflow/activities/document-processing-contracts/results" xmlns:p5="http://schemas.uipath.com/workflow/activities/document-processing-contracts/dom" xmlns:p6="http://schemas.uipath.com/workflow/activities/document-processing-contracts/taxonomy" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd2="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_FilePath" Type="InArgument(x:String)" />
+    <x:Property Name="extrDataSet" Type="OutArgument(sd:DataSet)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1003,819</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1003,1069</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessAttachment_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -34,6 +35,32 @@
       <x:String>GlobalVariablesNamespace</x:String>
       <x:String>GlobalConstantsNamespace</x:String>
       <x:String>System.Reflection</x:String>
+      <x:String>UiPath.IntelligentOCR.Activities.Digitization</x:String>
+      <x:String>UiPath.DocumentProcessing.Contracts.Dom</x:String>
+      <x:String>UiPath.Vision.OCR</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.OCR.Contracts</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.OCR.Activities</x:String>
+      <x:String>UiPath.OCR.Contracts.Activities</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Files.Enums</x:String>
+      <x:String>UiPath.Shared.Activities.Utils</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Files.Models</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Files</x:String>
+      <x:String>UiPath.Shared.Activities.ConnectionService.Contracts</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Contracts</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities</x:String>
+      <x:String>UiPath.DocumentProcessing.Contracts.Taxonomy</x:String>
+      <x:String>UiPath.IntelligentOCR.Activities.TaxonomyManagement</x:String>
+      <x:String>UiPath.DocumentProcessing.Contracts.Results</x:String>
+      <x:String>UiPath.IntelligentOCR.Activities.DataExtraction</x:String>
+      <x:String>UiPath.DocumentProcessing.Contracts.DataExtraction</x:String>
+      <x:String>UiPath.DocumentProcessing.Contracts</x:String>
+      <x:String>UiPath.SmartData.PositionBasedExtraction.Storage</x:String>
+      <x:String>UiPath.IntelligentOCR.Activities.ValidationStation</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -62,13 +89,157 @@
       <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
       <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.DocumentProcessing.Contracts</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Vision.Core</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Contracts</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.SmartData.PositionBasedExtraction</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ProcessAttachment" sap:VirtualizedContainerService.HintSize="450,103" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ProcessAttachment" sap:VirtualizedContainerService.HintSize="540,1004" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="p6:DocumentTaxonomy" Name="myTaxonomy" />
+      <Variable x:TypeArguments="x:String" Name="doctext" />
+      <Variable x:TypeArguments="p5:Document" Name="DOM" />
+      <Variable x:TypeArguments="p4:ExtractionResult" Name="extrResult" />
+      <Variable x:TypeArguments="x:String" Name="DU_Key" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:GetRobotAsset TimeoutMS="{x:Null}" AssetName="DU_Key" CacheStrategy="None" DisplayName="Get Asset" FolderPath="Alessandro Rapisarda" sap:VirtualizedContainerService.HintSize="478,25" sap2010:WorkflowViewState.IdRef="GetRobotAsset_1">
+      <ui:GetRobotAsset.Value>
+        <OutArgument x:TypeArguments="x:String">[DU_Key]</OutArgument>
+      </ui:GetRobotAsset.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:GetRobotAsset>
+    <p:LoadTaxonomy DisplayName="Load Taxonomy" sap:VirtualizedContainerService.HintSize="478,25" sap2010:WorkflowViewState.IdRef="LoadTaxonomy_1" Taxonomy="[myTaxonomy]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </p:LoadTaxonomy>
+    <p:DigitizeDocument ApplyOcrMigrated="False" ApplyOcrOnPdf="Auto" DegreeOfParallelism="-1" DetectCheckboxes="True" DisplayName="Digitize Document" DocumentObjectModel="[DOM]" DocumentPath="[in_FilePath]" DocumentText="[doctext]" ForceApplyOCR="False" sap:VirtualizedContainerService.HintSize="478,25" sap2010:WorkflowViewState.IdRef="DigitizeDocument_1">
+      <p:DigitizeDocument.OCREngine>
+        <ActivityFunc x:TypeArguments="sd1:Image, x:String, scg:IEnumerable(scg:KeyValuePair(sd2:Rectangle, x:String))" Argument1="{x:Reference __ReferenceID0}" Argument2="{x:Reference __ReferenceID1}">
+          <p1:UiPathDocumentOCR Endpoint="{x:Null}" Output="{x:Null}" Text="{x:Null}" UseLocalServer="{x:Null}" ApiKey="[DU_Key]" ComputeSkewAngle="False" DisplayName="UiPath Document OCR" ExtractWords="True" sap:VirtualizedContainerService.HintSize="312,25" sap2010:WorkflowViewState.IdRef="UiPathDocumentOCR_1" Language="auto" NoopExecution="False" Profile="None" Scale="1" Timeout="100000">
+            <p1:UiPathDocumentOCR.Image>
+              <InArgument x:TypeArguments="sd1:Image">
+                <DelegateArgumentValue x:TypeArguments="sd1:Image" sap2010:WorkflowViewState.IdRef="DelegateArgumentValue`1_1">
+                  <DelegateInArgument x:TypeArguments="sd1:Image" x:Name="__ReferenceID0" Name="Image" />
+                </DelegateArgumentValue>
+              </InArgument>
+            </p1:UiPathDocumentOCR.Image>
+            <p1:UiPathDocumentOCR.PredictionId>
+              <InArgument x:TypeArguments="x:String">
+                <DelegateArgumentValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="DelegateArgumentValue`1_2">
+                  <DelegateInArgument x:TypeArguments="x:String" x:Name="__ReferenceID1" Name="PredictionId" />
+                </DelegateArgumentValue>
+              </InArgument>
+            </p1:UiPathDocumentOCR.PredictionId>
+          </p1:UiPathDocumentOCR>
+        </ActivityFunc>
+      </p:DigitizeDocument.OCREngine>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </p:DigitizeDocument>
+    <p2:DataExtractionScope ClassificationResult="{x:Null}" DisplayName="Data Extraction Scope" DocumentObjectModel="[DOM]" DocumentPath="[in_FilePath]" DocumentText="[doctext]" DocumentTypeId="NoGroup.NoCategory.OOEV_Form" ExtractionResult="[extrResult]" FormatValuesIfPossible="True" sap:VirtualizedContainerService.HintSize="478,484" sap2010:WorkflowViewState.IdRef="DataExtractionScope_1" Taxonomy="[myTaxonomy]" TaxonomyConfiguration="{}{&quot;TaxonomyMappings&quot;:{&quot;UI9437f887ff3c461cb48b21f37c81f8c3&quot;:{&quot;DocumentTypeMappings&quot;:{&quot;NoGroup.NoCategory.OOEV_Form&quot;:{&quot;FieldMappings&quot;:{&quot;NoGroup.NoCategory.OOEV_Form.Meldung&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Meldung&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Polizze&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Polizze&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Ersteller&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Ersteller&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Sparte&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Sparte&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Ursache&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Ursache&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Erstellungsdatum&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Erstellungsdatum&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Welterleitungsdatum&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Welterleitungsdatum&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Melder&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Melder&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Versicherungsnehmer(Name)&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Versicherungsnehmer(Name)&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Versicherungsnehmer(Address)&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Versicherungsnehmer(Address)&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Ereignisdatum&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Ereignisdatum&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Shadenadresse&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Shadenadresse&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Schadenhergang&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Schadenhergang&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Regressmoglichkeit&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Regressmoglichkeit&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.GeschatzteSchadenhohe&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.GeschatzteSchadenhohe&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true},&quot;NoGroup.NoCategory.OOEV_Form.Vorsteuerabzygsberechtigung&quot;:{&quot;OriginalTaxonomyFieldId&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Vorsteuerabzygsberechtigung&quot;,&quot;ExtractorTaxonomyFieldId&quot;:null,&quot;ShouldExtract&quot;:true}},&quot;ExtractorDocumentTypeId&quot;:null}}}},&quot;ExtractorMinimumConfidence&quot;:{&quot;UI9437f887ff3c461cb48b21f37c81f8c3&quot;:&quot;0&quot;},&quot;ExtractorsAliases&quot;:{},&quot;DocumentTypeOptionsByExtractor&quot;:{&quot;UI9437f887ff3c461cb48b21f37c81f8c3&quot;:[]}}">
+      <p2:DataExtractionScope.Extractors>
+        <p2:FormExtractor SerializedSignatureFields="{x:Null}" ApiKey="[DU_Key]" DisplayName="Form Extractor" Endpoint="https://du.uipath.com/svc/formextractor" sap:VirtualizedContainerService.HintSize="234,162" sap2010:WorkflowViewState.IdRef="FormExtractor_1" MinOverlapPercentage="65" PersistenceId="UI9437f887ff3c461cb48b21f37c81f8c3" SendDocumentsForAlgorithmImprovements="True" SerializedSettings="{}{}" SerializedTemplates="[{&quot;DocumentTypeId&quot;:&quot;NoGroup.NoCategory.OOEV_Form&quot;,&quot;FormId&quot;:&quot;e368e230&quot;,&quot;FormName&quot;:&quot;OOEV_Template&quot;,&quot;OriginalFileExtension&quot;:&quot;pdf&quot;,&quot;Pages&quot;:[{&quot;Page&quot;:0,&quot;Size&quot;:[0.0,0.0,612.0,792.0],&quot;SkewAngle&quot;:-0.1,&quot;Evidence&quot;:[{&quot;Text&quot;:&quot;Meldung&quot;,&quot;Box&quot;:[213.33,213.33,54.93,14.67]},{&quot;Text&quot;:&quot;-&quot;,&quot;Box&quot;:[213.87,270.93,5.33,13.6]},{&quot;Text&quot;:&quot;Polizze:&quot;,&quot;Box&quot;:[246.13,13.33,35.73,9.07]},{&quot;Text&quot;:&quot;Ersteller:&quot;,&quot;Box&quot;:[246.4,268.27,41.07,8.8]},{&quot;Text&quot;:&quot;Sparte:&quot;,&quot;Box&quot;:[261.6,13.33,33.07,10.67]},{&quot;Text&quot;:&quot;Erstellungsdatum:&quot;,&quot;Box&quot;:[261.87,268.27,82.93,10.4]},{&quot;Text&quot;:&quot;Ursache:&quot;,&quot;Box&quot;:[276.53,13.33,41.33,9.07]},{&quot;Text&quot;:&quot;Weiterleitungsdatum:&quot;,&quot;Box&quot;:[276.53,267.73,96.53,10.67]},{&quot;Text&quot;:&quot;Allgemeine&quot;,&quot;Box&quot;:[322.13,3.47,71.73,14.67]},{&quot;Text&quot;:&quot;Daten&quot;,&quot;Box&quot;:[322.13,78.13,37.6,12.0]},{&quot;Text&quot;:&quot;Melder:&quot;,&quot;Box&quot;:[351.47,13.33,34.13,8.8]},{&quot;Text&quot;:&quot;Versicherungsnehmer:&quot;,&quot;Box&quot;:[385.87,12.8,104.0,10.93]},{&quot;Text&quot;:&quot;Ansprechpartner:&quot;,&quot;Box&quot;:[432.8,12.8,80.27,10.93]},{&quot;Text&quot;:&quot;Vertreter:&quot;,&quot;Box&quot;:[448.53,13.07,43.2,8.8]},{&quot;Text&quot;:&quot;Ereignisdatum:&quot;,&quot;Box&quot;:[482.4,13.33,69.07,10.4]},{&quot;Text&quot;:&quot;Schadenadresse:&quot;,&quot;Box&quot;:[496.8,13.07,79.2,9.33]},{&quot;Text&quot;:&quot;Schadenhergang:&quot;,&quot;Box&quot;:[541.87,13.07,80.27,11.2]},{&quot;Text&quot;:&quot;Regressmöglichkeit:&quot;,&quot;Box&quot;:[558.67,13.33,93.07,10.93]},{&quot;Text&quot;:&quot;geschätzte&quot;,&quot;Box&quot;:[593.6,13.07,49.87,10.4]},{&quot;Text&quot;:&quot;Schadenhöhe:&quot;,&quot;Box&quot;:[593.33,64.8,65.6,8.8]},{&quot;Text&quot;:&quot;Mobil:&quot;,&quot;Box&quot;:[400.8,393.33,28.27,8.8]},{&quot;Text&quot;:&quot;Vorsteuerabzugsberechtigung:&quot;,&quot;Box&quot;:[593.33,208.0,140.0,10.93]}],&quot;Fields&quot;:[{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Meldung&quot;,&quot;Box&quot;:[200.6475,279.6496,146.3335,31.8702]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Polizze&quot;,&quot;Box&quot;:[240.1485,102.3437,100.5482,16.6084]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Ersteller&quot;,&quot;Box&quot;:[241.0463,480.2971,128.3785,17.0573]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Sparte&quot;,&quot;Box&quot;:[260.3479,102.7925,133.3161,12.5685]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Ursache&quot;,&quot;Box&quot;:[275.1608,102.7925,134.2138,11.6708]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Erstellungsdatum&quot;,&quot;Box&quot;:[259.4502,481.6437,127.4807,13.4663]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Welterleitungsdatum&quot;,&quot;Box&quot;:[274.712,481.6437,126.1341,12.1196]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Melder&quot;,&quot;Box&quot;:[349.2253,158.4531,199.7497,13.0174]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Versicherungsnehmer(Name)&quot;,&quot;Box&quot;:[382.891,158.902,209.625,13.0174]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Versicherungsnehmer(Address)&quot;,&quot;Box&quot;:[399.0505,158.4531,210.9716,12.1196]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Ereignisdatum&quot;,&quot;Box&quot;:[478.5015,158.0043,51.6207,14.8129]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Shadenadresse&quot;,&quot;Box&quot;:[494.2122,153.5155,203.7896,14.364]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Schadenhergang&quot;,&quot;Box&quot;:[539.0998,155.311,439.8982,16.1595]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Regressmoglichkeit&quot;,&quot;Box&quot;:[557.0548,153.9644,34.5634,12.1196]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.GeschatzteSchadenhohe&quot;,&quot;Box&quot;:[588.925,153.9644,37.2567,15.2618]},{&quot;Field&quot;:&quot;NoGroup.NoCategory.OOEV_Form.Vorsteuerabzygsberechtigung&quot;,&quot;Box&quot;:[586.6806,350.1231,54.314,20.1994]}],&quot;Tables&quot;:[]}],&quot;AnchorBasedConfiguration&quot;:{&quot;AnchorBasedFieldConfiguration&quot;:[]}}]" Timeout="100000">
+          <p2:FormExtractor.DocumentBounds>
+            <InArgument x:TypeArguments="p4:ResultsDocumentBounds">
+              <DelegateArgumentValue x:TypeArguments="p4:ResultsDocumentBounds">
+                <DelegateInArgument x:TypeArguments="p4:ResultsDocumentBounds" Name="DocumentBounds" />
+              </DelegateArgumentValue>
+            </InArgument>
+          </p2:FormExtractor.DocumentBounds>
+          <p2:FormExtractor.DocumentObjectModel>
+            <InArgument x:TypeArguments="p5:Document">
+              <DelegateArgumentValue x:TypeArguments="p5:Document">
+                <DelegateInArgument x:TypeArguments="p5:Document" Name="DocumentObjectModel" />
+              </DelegateArgumentValue>
+            </InArgument>
+          </p2:FormExtractor.DocumentObjectModel>
+          <p2:FormExtractor.DocumentPath>
+            <InArgument x:TypeArguments="x:String">
+              <DelegateArgumentValue x:TypeArguments="x:String">
+                <DelegateInArgument x:TypeArguments="x:String" Name="DocumentPath" />
+              </DelegateArgumentValue>
+            </InArgument>
+          </p2:FormExtractor.DocumentPath>
+          <p2:FormExtractor.DocumentText>
+            <InArgument x:TypeArguments="x:String">
+              <DelegateArgumentValue x:TypeArguments="x:String">
+                <DelegateInArgument x:TypeArguments="x:String" Name="DocumentText" />
+              </DelegateArgumentValue>
+            </InArgument>
+          </p2:FormExtractor.DocumentText>
+          <p2:FormExtractor.ExtractorDocumentType>
+            <InArgument x:TypeArguments="p3:ExtractorDocumentType">
+              <DelegateArgumentValue x:TypeArguments="p3:ExtractorDocumentType">
+                <DelegateInArgument x:TypeArguments="p3:ExtractorDocumentType" Name="ExtractorDocumentType" />
+              </DelegateArgumentValue>
+            </InArgument>
+          </p2:FormExtractor.ExtractorDocumentType>
+          <p2:FormExtractor.ExtractorResult>
+            <OutArgument x:TypeArguments="p3:ExtractorResult">
+              <DelegateArgumentReference x:TypeArguments="p3:ExtractorResult">
+                <DelegateOutArgument x:TypeArguments="p3:ExtractorResult" Name="ExtractorResult" />
+              </DelegateArgumentReference>
+            </OutArgument>
+          </p2:FormExtractor.ExtractorResult>
+          <p2:FormExtractor.PredictionId>
+            <InArgument x:TypeArguments="x:String">
+              <DelegateArgumentValue x:TypeArguments="x:String">
+                <DelegateInArgument x:TypeArguments="x:String" Name="PredictionId" />
+              </DelegateArgumentValue>
+            </InArgument>
+          </p2:FormExtractor.PredictionId>
+        </p2:FormExtractor>
+      </p2:DataExtractionScope.Extractors>
+    </p2:DataExtractionScope>
+    <p2:ExportExtractionResults DataSet="[extrDataSet]" DisplayName="Export Extraction Results" ExtractionResult="[extrResult]" sap:VirtualizedContainerService.HintSize="478,174" sap2010:WorkflowViewState.IdRef="ExportExtractionResults_1" IncludeConfidence="False" IncludeOCRConfidence="False" />
   </Sequence>
 </Activity>
